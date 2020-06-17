@@ -1,5 +1,3 @@
 # tennist
 
-new
-
-하하하하하
+This is for tennis
