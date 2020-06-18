@@ -37,7 +37,7 @@ exports.up = async (knex) => {
       references(table, tableNames.user);
       url(table, 'img_url');
     }),
-    knex.schema.createTable(tableNames.userPhysical, (table) => {
+    knex.schema.createTable(tableNames.racket, (table) => {
       table.increments('id').notNullable();
       table.string('model').notNullable();
       table.integer('weight_ungut').notNullable();
@@ -58,4 +58,12 @@ exports.up = async (knex) => {
 /**
  * @param {Knex} knex
  */
-exports.down = async (knex) => {};
+exports.down = async (knex) => {
+  await Promise.all(
+    [
+      tableNames.userPhysical,
+      tableNames.userImg,
+      tableNames.racket,
+    ].map((tablename) => knex.schema.dropTableIfExists(tablename))
+  );
+};
