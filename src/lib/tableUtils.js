@@ -20,7 +20,10 @@ function url(table, columnName) {
 function email(table, columnName) {
   return table.string(columnName, 254);
 }
-
+/**
+ * @param {knex.CreateTableBuilder} table
+ * @param {string} tableName
+ */
 function references(table, tableName) {
   table
     .integer(`${tableName}_id`)

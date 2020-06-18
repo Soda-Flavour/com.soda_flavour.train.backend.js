@@ -14,8 +14,8 @@ module.exports = {
   gutTension: 't_gut_tension',
   replacementGrip: 't_replacement_grip',
 
-  userImg: 't_user_img',
   userPhysical: 't_user_physical',
+  userImg: 't_user_img',
   racket: 't_racket',
   gut: 't_gut',
 
