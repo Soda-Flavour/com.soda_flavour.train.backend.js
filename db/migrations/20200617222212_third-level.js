@@ -22,6 +22,7 @@ exports.up = async (knex) => {
       references(table, tableNames.racket);
       table.integer('seq').unsigned();
       table.integer('grip_size').unsigned();
+      addDefaultColumns(table);
     }),
   ]);
 };

@@ -31,11 +31,13 @@ exports.up = async (knex) => {
       references(table, tableNames.backhandStyle);
       table.integer('age').unsigned();
       table.charset('sex');
+      addDefaultColumns(table);
     }),
     knex.schema.createTable(tableNames.userImg, (table) => {
       table.increments('id').notNullable();
       references(table, tableNames.user);
       url(table, 'img_url');
+      addDefaultColumns(table);
     }),
     knex.schema.createTable(tableNames.racket, (table) => {
       table.increments('id').notNullable();
@@ -47,10 +49,12 @@ exports.up = async (knex) => {
       references(table, tableNames.racketPattern);
       references(table, tableNames.racketLength);
       references(table, tableNames.racketbalance);
+      addDefaultColumns(table);
     }),
     createNameTable(knex, tableNames.gut, (table) => {
       references(table, tableNames.gutCompany);
       references(table, tableNames.gutGauge);
+      addDefaultColumns(table);
     }),
   ]);
 };
@@ -64,6 +68,7 @@ exports.down = async (knex) => {
       tableNames.userPhysical,
       tableNames.userImg,
       tableNames.racket,
+      tableNames.gut,
     ].map((tablename) => knex.schema.dropTableIfExists(tablename))
   );
 };

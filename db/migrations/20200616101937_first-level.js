@@ -61,18 +61,16 @@ exports.up = async (knex) => {
     knex.schema.createTable(tableNames.gutGauge, (table) => {
       table.increments('id').notNullable();
       table.integer('value').unsigned().notNullable();
+      addDefaultColumns(table);
     }),
     knex.schema.createTable(tableNames.gutTension, (table) => {
       table.increments('id').notNullable();
       table.float('lb').unsigned().notNullable();
       table.float('kg').unsigned().notNullable();
     }),
-    createNameTable(knex, tableNames.gutCompany, (table) => table.string('type').notNullable()),
-  ]);
-
-  // Start of Second Tables Generation
-  await Promise.all([
-
+    createNameTable(knex, tableNames.replacementGrip, (table) =>
+      table.string('type').notNullable()
+    ),
   ]);
 
   // await knex.schema.createTable(tableNames.address, (table) => {
@@ -90,9 +88,21 @@ exports.up = async (knex) => {
 
 exports.down = async (knex) => {
   await Promise.all(
-    [tableNames.user, tableNames.country, tableNames.state].map((tablename) =>
-      knex.schema.dropTableIfExists(tablename)
-
-    )
+    [
+      tableNames.user,
+      tableNames.playStyle,
+      tableNames.forehandStyle,
+      tableNames.backhandStyle,
+      tableNames.racketCompany,
+      tableNames.racketVersion,
+      tableNames.racketHeadSize,
+      tableNames.racketPattern,
+      tableNames.racketLength,
+      tableNames.racketbalance,
+      tableNames.gutCompany,
+      tableNames.gutGauge,
+      tableNames.gutTension,
+      tableNames.replacementGrip,
+    ].map((tablename) => knex.schema.dropTableIfExists(tablename))
   );
 };

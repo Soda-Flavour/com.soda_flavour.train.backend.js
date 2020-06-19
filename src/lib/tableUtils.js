@@ -24,13 +24,18 @@ function email(table, columnName) {
  * @param {knex.CreateTableBuilder} table
  * @param {string} tableName
  */
-function references(table, tableName) {
-  table
-    .integer(`${tableName}_id`)
+function references(table, tableName, cnotNullable = true, columnName = '') {
+  const definition = table
+    .integer(`${columnName || tableName}_id`)
     .unsigned()
     .inTable(tableName)
     .references('id')
     .onDelete('cascade');
+
+  if (notNullable) {
+    definition.notNullable();
+  }
+  return definition;
 }
 
 module.exports = {
