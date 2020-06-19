@@ -24,8 +24,8 @@ exports.up = async (knex) => {
       table.integer('overgrip_num').unsigned();
       references(table, tableNames.racketbalance);
       references(table, tableNames.gut);
-      references(table, tableNames.gutTension, fasle, 'main_gut_tension_id');
-      references(table, tableNames.gutTension, fasle, 'cross_gut_tension_id');
+      references(table, tableNames.gutTension, false, 'main_gut_tension_id');
+      references(table, tableNames.gutTension, false, 'cross_gut_tension_id');
       addDefaultColumns(table);
     }),
   ]);

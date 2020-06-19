@@ -24,12 +24,12 @@ function email(table, columnName) {
  * @param {knex.CreateTableBuilder} table
  * @param {string} tableName
  */
-function references(table, tableName, cnotNullable = true, columnName = '') {
+function references(table, tableName, notNullable = true, columnName = '') {
   const definition = table
     .integer(`${columnName || tableName}_id`)
     .unsigned()
-    .inTable(tableName)
     .references('id')
+    .inTable(tableName)
     .onDelete('cascade');
 
   if (notNullable) {

@@ -53,9 +53,9 @@ exports.up = async (knex) => {
     }),
     knex.schema.createTable(tableNames.racketbalance, (table) => {
       table.increments('id').notNullable();
+      table.string('balance').notNullable();
       table.integer('milimeter').unsigned().notNullable();
       table.float('point').unsigned().notNullable();
-      table.charset('gravity').unsigned().notNullable();
     }),
     createNameTable(knex, tableNames.gutCompany),
     knex.schema.createTable(tableNames.gutGauge, (table) => {
@@ -88,21 +88,8 @@ exports.up = async (knex) => {
 
 exports.down = async (knex) => {
   await Promise.all(
-    [
-      tableNames.user,
-      tableNames.playStyle,
-      tableNames.forehandStyle,
-      tableNames.backhandStyle,
-      tableNames.racketCompany,
-      tableNames.racketVersion,
-      tableNames.racketHeadSize,
-      tableNames.racketPattern,
-      tableNames.racketLength,
-      tableNames.racketbalance,
-      tableNames.gutCompany,
-      tableNames.gutGauge,
-      tableNames.gutTension,
-      tableNames.replacementGrip,
-    ].map((tablename) => knex.schema.dropTableIfExists(tablename))
+    Object.values(tableNames)
+      .reverse()
+      .map((tablename) => knex.schema.dropTableIfExists(tablename))
   );
 };

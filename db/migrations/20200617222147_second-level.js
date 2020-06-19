@@ -25,19 +25,21 @@ exports.up = async (knex) => {
       references(table, tableNames.user);
       table.integer('weight_kg').unsigned();
       table.integer('height_cm').unsigned();
-      table.charset('handed');
+      table.string('handed');
       references(table, tableNames.playStyle);
       references(table, tableNames.forehandStyle);
       references(table, tableNames.backhandStyle);
       table.integer('age').unsigned();
-      table.charset('sex');
+      table.string('sex');
       addDefaultColumns(table);
+      console.log(`${tableNames.userPhysical} 테이블 생성 성공`);
     }),
     knex.schema.createTable(tableNames.userImg, (table) => {
       table.increments('id').notNullable();
       references(table, tableNames.user);
       url(table, 'img_url');
       addDefaultColumns(table);
+      console.log(`${tableNames.userImg} 테이블 생성 성공`);
     }),
     knex.schema.createTable(tableNames.racket, (table) => {
       table.increments('id').notNullable();
@@ -50,11 +52,13 @@ exports.up = async (knex) => {
       references(table, tableNames.racketLength);
       references(table, tableNames.racketbalance);
       addDefaultColumns(table);
+
+      console.log(`${tableNames.racket} 테이블 생성 성공`);
     }),
     createNameTable(knex, tableNames.gut, (table) => {
       references(table, tableNames.gutCompany);
       references(table, tableNames.gutGauge);
-      addDefaultColumns(table);
+      console.log(`${tableNames.gut} 테이블 생성 성공`);
     }),
   ]);
 };
@@ -63,12 +67,12 @@ exports.up = async (knex) => {
  * @param {Knex} knex
  */
 exports.down = async (knex) => {
-  await Promise.all(
-    [
-      tableNames.userPhysical,
-      tableNames.userImg,
-      tableNames.racket,
-      tableNames.gut,
-    ].map((tablename) => knex.schema.dropTableIfExists(tablename))
-  );
+  // await Promise.all(
+  //   [
+  //     tableNames.userPhysical,
+  //     tableNames.userImg,
+  //     tableNames.racket,
+  //     tableNames.gut,
+  //   ].map((tablename) => knex.schema.dropTableIfExists(tablename))
+  // );
 };

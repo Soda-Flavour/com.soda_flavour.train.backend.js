@@ -1,4 +1,4 @@
-/* eslint-disable implicit-arrow-linebreak */
+ㅞㅌ; /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-unused-vars */
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
@@ -30,15 +30,19 @@ exports.seed = async (knex) => {
 
   const createUserId = await knex(tableNames.user).insert(user).returning();
 
-  console.log('User created:', {
-    password,
-  }, createUserId);
+  console.log(
+    'User created:',
+    {
+      password,
+    },
+    createUserId
+  );
 
-  await knex(tableNames.country)
-    .insert(countries);
+  await knex(tableNames.country).insert(countries);
 
-  await knex(tableNames.state)
-    .insert([{
+  await knex(tableNames.state).insert([
+    {
       name: 'CO',
-    }]);
+    },
+  ]);
 };
