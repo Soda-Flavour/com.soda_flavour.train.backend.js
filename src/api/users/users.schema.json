@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "User",
+  "description": "유저의 스키마",
+  "default": {},
+  "examples": [
+    {
+      "id": 1,
+      "email": "axa8380@gmail",
+      "nick": "소다맛 환타",
+      "created_at": "2020-06-06T04:13:52.245Z",
+      "updated_at": "2020-06-06T04:13:52.245Z"
+    }
+  ],
+  "required": ["email", "nick", "password"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The database id."
+    },
+    "email": {
+      "$id": "#/properties/email",
+      "type": "string",
+      "title": "유저의 이메일은 유니크 값이다."
+    },
+    "nick": {
+      "$id": "#/properties/nick",
+      "type": "string",
+      "title": "닉네임 값은 유니크이다"
+    },
+    "password": {
+      "$id": "#/properties/password",
+      "type": "string",
+      "title": "비밀번호"
+    },
+    "created_at": {
+      "$id": "#/properties/created_at",
+      "type": "string",
+      "title": "유저 생성일"
+    },
+    "updated_at": {
+      "$id": "#/properties/updated_at",
+      "type": "string",
+      "title": "유저정보 마지막 업데이트일"
+    }
+  }
+}
