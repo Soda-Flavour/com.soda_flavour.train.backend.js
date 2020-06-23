@@ -6,7 +6,7 @@ function sign(payload) {
       payload,
       process.env.JWT_SECRET,
       {
-        expiresIn: '1d',
+        expiresIn: '1h',
       },
       (error, token) => {
         if (error) return reject(error);
@@ -16,6 +16,16 @@ function sign(payload) {
   });
 }
 
+function verify(token) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+      if (error) return reject(error);
+      return resolve(decoded);
+    });
+  });
+}
+
 module.exports = {
   sign,
+  verify,
 };

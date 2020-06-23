@@ -1,14 +1,36 @@
 const express = require('express');
+const yup = require('yup');
 
 const User = require('./users.model');
+const authMiddlewares = require('../auth/auth.middlewares');
 const { orWhereNotExists } = require('../../db');
 const router = express.Router();
+router.use(authMiddlewares.checkUserHasToken);
 
-router.get('/', async (req, res) => {
-  const users = await User.query()
-    .select('id', 'email', 'nick')
-    .where('deleted_at', null);
-  res.json(users);
+const schema = yup.object().shape({
+  id: yup.number().required(),
+});
+
+// router.get('/', async (req, res) => {
+//   const users = await User.query()
+//     .select('id', 'email', 'nick')
+//     .where('deleted_at', null);
+//   res.json(users);
+// });
+
+router.get('/:id', authMiddlewares.isLoggedIn, async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    await schema.validate({ id }, { abortEarly: false });
+    if (req.user.id != id) throw new Error('허용되지 않은 요청입니다.');
+    const users = await User.query()
+      .select('id', 'email', 'nick')
+      .where('id', id)
+      .where('deleted_at', null);
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.post('/', async (req, res) => {

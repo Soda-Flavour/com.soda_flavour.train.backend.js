@@ -2,6 +2,7 @@ const express = require('express');
 
 const queries = require('./gut_company.queryies');
 const { orWhereNotExists } = require('../../db');
+
 const router = express.Router();
 
 router.get('/', async (req, res) => {
