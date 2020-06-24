@@ -23,7 +23,7 @@ exports.up = async (knex) => {
     knex.schema.createTable(tableNames.user, (table) => {
       table.increments('id').notNullable();
       email(table, 'email').notNullable().unique();
-      table.string('nick').notNullable();
+      table.string('nick').notNullable().unique();
       table.string('password', 127).notNullable();
       // table.string('salt', 127).notNullable();
       table.string('phone');
