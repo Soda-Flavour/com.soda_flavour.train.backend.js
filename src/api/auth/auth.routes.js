@@ -1,9 +1,11 @@
 const express = require('express');
 const yup = require('yup');
 const bcrypt = require('bcrypt');
+const { DB_PREFIX } = require('../../constants/project');
 
 const jwt = require('../../lib/jwt');
 const User = require('../users/users.model');
+const UserPhysical = require('../user_physical/user_physical.model');
 const router = express.Router();
 
 const schema = yup.object().shape({
@@ -52,6 +54,14 @@ router.post('/signup', async (req, res, next) => {
       email,
       password: hashedPassword,
     });
+
+    const insertEemptyUserPhysical = await UserPhysical.query().insert({
+      [DB_PREFIX + 'user_id']: insertedUser.id,
+    });
+
+    console.log('피지컬~~ 피지컬~');
+    console.log(insertEemptyUserPhysical);
+
     delete insertedUser.password;
     const payload = {
       id: insertedUser.id,

@@ -1,30 +1,34 @@
-module.exports = {
-  user: 't_user',
-  playStyle: 't_play_style',
-  forehandStyle: 't_forehand_style',
-  backhandStyle: 't_backhand_style',
-  racketCompany: 't_racket_company',
-  racketVersion: 't_racket_version',
-  racketHeadSize: 't_racket_head_size',
-  racketPattern: 't_racket_pattern',
-  racketLength: 't_racket_length',
-  racketbalance: 't_racket_balance',
-  gutCompany: 't_gut_company',
-  gutGauge: 't_gut_gauge',
-  gutTension: 't_gut_tension',
-  replacementGrip: 't_replacement_grip',
+const { DB_PREFIX } = require('../constants/project');
 
-  userPhysical: 't_user_physical',
-  userImg: 't_user_img',
-  racket: 't_racket',
-  gut: 't_gut',
+let tableNames = {
+  user: DB_PREFIX + 'user',
+  playStyle: DB_PREFIX + 'play_style',
+  forehandStyle: DB_PREFIX + 'forehand_style',
+  backhandStyle: DB_PREFIX + 'backhand_style',
+  racketCompany: DB_PREFIX + 'racket_company',
+  racketVersion: DB_PREFIX + 'racket_version',
+  racketHeadSize: DB_PREFIX + 'racket_head_size',
+  racketPattern: DB_PREFIX + 'racket_pattern',
+  racketLength: DB_PREFIX + 'racket_length',
+  racketbalance: DB_PREFIX + 'racket_balance',
+  gutCompany: DB_PREFIX + 'gut_company',
+  gutGauge: DB_PREFIX + 'gut_gauge',
+  gutTension: DB_PREFIX + 'gut_tension',
+  replacementGrip: DB_PREFIX + 'replacement_grip',
 
-  userRacket: 't_user_racket',
-  userRacketHistory: 't_user_racket_history',
+  userPhysical: DB_PREFIX + 'user_physical',
+  userImg: DB_PREFIX + 'user_img',
+  racket: DB_PREFIX + 'racket',
+  gut: DB_PREFIX + 'gut',
 
-  userRacketHistorycoment: 't_user_racket_history_coment',
+  userRacket: DB_PREFIX + 'user_racket',
+  userRacketHistory: DB_PREFIX + 'user_racket_history',
+
+  userRacketHistorycoment: DB_PREFIX + 'user_racket_history_coment',
 
   // country: 't_country',
   // state: 't_state',
   // address: 't_address',
 };
+
+module.exports = tableNames;

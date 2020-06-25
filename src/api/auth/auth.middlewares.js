@@ -11,7 +11,6 @@ async function checkUserHasToken(req, res, next) {
 
     const user = await jwt.verify(token);
     req.user = user;
-
     next();
   } catch (error) {
     console.log('Token check error');
