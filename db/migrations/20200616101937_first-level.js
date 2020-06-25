@@ -38,7 +38,7 @@ exports.up = async (knex) => {
     knex.schema.createTable(tableNames.racketHeadSize, (table) => {
       table.increments('id').notNullable();
       table.integer('centimeter').unsigned().notNullable();
-      table.float('inch').unsigned().notNullable();
+      table.float('inch', 8, 1).unsigned().notNullable();
     }),
     knex.schema.createTable(tableNames.racketPattern, (table) => {
       table.increments('id').notNullable();
@@ -49,13 +49,13 @@ exports.up = async (knex) => {
     knex.schema.createTable(tableNames.racketLength, (table) => {
       table.increments('id').notNullable();
       table.integer('milimeter').unsigned().notNullable();
-      table.float('inch').unsigned().notNullable();
+      table.float('inch', 8, 1).unsigned().notNullable();
     }),
     knex.schema.createTable(tableNames.racketbalance, (table) => {
       table.increments('id').notNullable();
       table.string('balance').notNullable();
       table.integer('milimeter').unsigned().notNullable();
-      table.float('point').unsigned().notNullable();
+      table.float('point', 8, 1).unsigned().notNullable();
     }),
     createNameTable(knex, tableNames.gutCompany),
     knex.schema.createTable(tableNames.gutGauge, (table) => {
@@ -65,8 +65,8 @@ exports.up = async (knex) => {
     }),
     knex.schema.createTable(tableNames.gutTension, (table) => {
       table.increments('id').notNullable();
-      table.float('lb').unsigned().notNullable();
-      table.float('kg').unsigned().notNullable();
+      table.float('lb', 8, 1).unsigned().notNullable();
+      table.float('kg', 8, 1).unsigned().notNullable();
     }),
     createNameTable(knex, tableNames.replacementGrip, (table) =>
       table.string('type').notNullable()
