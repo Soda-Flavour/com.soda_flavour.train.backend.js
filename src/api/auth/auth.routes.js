@@ -57,7 +57,7 @@ router.post('/signup', async (req, res, next) => {
     });
 
     const insertEemptyUserPhysical = await UserPhysical.query(trx).insert({
-      [DB_PREFIX + 'user_i']: insertedUser.id,
+      [DB_PREFIX + 'user_id']: insertedUser.id,
     });
 
     console.log('피지컬~~ 피지컬~');
