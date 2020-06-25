@@ -2,17 +2,12 @@
 /* eslint-disable no-unused-vars */
 
 const Knex = require('knex');
-const tableNames = require('../../src/constants/tableName');
+const tableNames = require('../../src/constants/tableNames');
 /**
  * @param {Knex} knex
  */
 exports.seed = async (knex) => {
-  // await orderedTableNames.reduce(async (promise, table_name) => {
-  //   await Promise;
-  //   console.log('clear', table_name);
-  //   return knex(table_name).del();
-  // }, Promise.resolve());
-
+  await knex(tableNames.backhandStyle).del();
   const backhandStyleChart = [
     {
       name: 'One-Handed ',
@@ -23,7 +18,6 @@ exports.seed = async (knex) => {
       name_kor: '투핸드',
     },
   ];
-
   await knex(tableNames.backhandStyle).insert(backhandStyleChart);
   console.log('Headsize created.');
 };

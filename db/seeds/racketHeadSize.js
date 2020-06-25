@@ -2,16 +2,12 @@
 /* eslint-disable no-unused-vars */
 
 const Knex = require('knex');
-const tableNames = require('../../src/constants/tableName');
+const tableNames = require('../../src/constants/tableNames');
 /**
  * @param {Knex} knex
  */
 exports.seed = async (knex) => {
-  // await orderedTableNames.reduce(async (promise, table_name) => {
-  //   await Promise;
-  //   console.log('clear', table_name);
-  //   return knex(table_name).del();
-  // }, Promise.resolve());
+  await knex(tableNames.racketHeadSize).del();
 
   const headSizeChart = [
     {
@@ -33,5 +29,5 @@ exports.seed = async (knex) => {
   ];
 
   await knex(tableNames.racketHeadSize).insert(headSizeChart);
-  console.log('Headsize created.');
+  console.log('racketHeadSize created.');
 };

@@ -2,17 +2,12 @@
 /* eslint-disable no-unused-vars */
 
 const Knex = require('knex');
-const tableNames = require('../../src/constants/tableName');
+const tableNames = require('../../src/constants/tableNames');
 /**
  * @param {Knex} knex
  */
 exports.seed = async (knex) => {
-  // await orderedTableNames.reduce(async (promise, table_name) => {
-  //   await Promise;
-  //   console.log('clear', table_name);
-  //   return knex(table_name).del();
-  // }, Promise.resolve());
-
+  await knex(tableNames.racketbalance).del();
   const balanceChart = [];
 
   var heavyChart;
@@ -39,5 +34,5 @@ exports.seed = async (knex) => {
   }
 
   await knex(tableNames.racketbalance).insert(balanceChart);
-  console.log('balance chart created.');
+  console.log('racketbalance created.');
 };

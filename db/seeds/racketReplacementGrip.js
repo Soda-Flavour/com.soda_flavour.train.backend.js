@@ -2,16 +2,12 @@
 /* eslint-disable no-unused-vars */
 
 const Knex = require('knex');
-const tableNames = require('../../src/constants/tableName');
+const tableNames = require('../../src/constants/tableNames');
 /**
  * @param {Knex} knex
  */
 exports.seed = async (knex) => {
-  // await orderedTableNames.reduce(async (promise, table_name) => {
-  //   await Promise;
-  //   console.log('clear', table_name);
-  //   return knex(table_name).del();
-  // }, Promise.resolve());
+  await knex(tableNames.replacementGrip).del();
 
   const replacementGripChart = [
     {
@@ -27,5 +23,5 @@ exports.seed = async (knex) => {
   ];
 
   await knex(tableNames.replacementGrip).insert(replacementGripChart);
-  console.log('Headsize created.');
+  console.log('replacementGrip created.');
 };
