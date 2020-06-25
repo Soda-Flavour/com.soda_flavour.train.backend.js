@@ -12,7 +12,7 @@ const {
   email,
   references,
 } = require('../../src/lib/tableUtils');
-const tableNames = require('../../src/constants/tableName');
+const tableNames = require('../../src/constants/tableNames');
 
 exports.up = async (knex) => {
   await Promise.all([

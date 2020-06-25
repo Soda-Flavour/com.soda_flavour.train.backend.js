@@ -4,7 +4,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 const Knex = require('knex');
-const tableNames = require('../../src/constants/tableName');
+const tableNames = require('../../src/constants/tableNames');
 const {
   addDefaultColumns,
   createNameTable,

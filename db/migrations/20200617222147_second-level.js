@@ -12,7 +12,7 @@ const {
   email,
   references,
 } = require('../../src/lib/tableUtils');
-const tableNames = require('../../src/constants/tableName');
+const tableNames = require('../../src/constants/tableNames');
 
 /**
  * @param {Knex} knex
@@ -26,9 +26,9 @@ exports.up = async (knex) => {
       table.integer('weight_kg').unsigned();
       table.integer('height_cm').unsigned();
       table.string('handed');
-      references(table, tableNames.playStyle);
-      references(table, tableNames.forehandStyle);
-      references(table, tableNames.backhandStyle);
+      references(table, tableNames.playStyle, false);
+      references(table, tableNames.forehandStyle, false);
+      references(table, tableNames.backhandStyle, false);
       table.integer('age').unsigned();
       table.string('sex');
       addDefaultColumns(table);
