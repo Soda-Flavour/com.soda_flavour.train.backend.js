@@ -34,6 +34,7 @@ const errorMessages = {
 
 router.post('/signup', async (req, res, next) => {
   const { nick, email, password } = req.body;
+  const trx = await User.startTransaction();
   try {
     const newUser = {
       nick,
@@ -49,14 +50,14 @@ router.post('/signup', async (req, res, next) => {
       throw error;
     }
     const hashedPassword = await bcrypt.hash(password, 12);
-    const insertedUser = await User.query().insert({
+    const insertedUser = await User.query(trx).insert({
       nick,
       email,
       password: hashedPassword,
     });
 
-    const insertEemptyUserPhysical = await UserPhysical.query().insert({
-      [DB_PREFIX + 'user_id']: insertedUser.id,
+    const insertEemptyUserPhysical = await UserPhysical.query(trx).insert({
+      [DB_PREFIX + 'user_i']: insertedUser.id,
     });
 
     console.log('피지컬~~ 피지컬~');
@@ -73,7 +74,9 @@ router.post('/signup', async (req, res, next) => {
       user: payload,
       token,
     });
+    await trx.commit();
   } catch (error) {
+    await trx.rollback();
     next(error);
   }
 });
