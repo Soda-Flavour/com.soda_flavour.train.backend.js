@@ -30,6 +30,7 @@ const schema = yup.object().shape({
 const errorMessages = {
   invalidLogin: '로그인 실패',
   emailInUse: '사용중인 이메일',
+  nickInUse: '사용중인 닉네임',
 };
 
 router.post('/signup', async (req, res, next) => {
@@ -49,6 +50,14 @@ router.post('/signup', async (req, res, next) => {
       res.status(403);
       throw error;
     }
+
+    const existingNick = await User.query().where({ nick }).first();
+    if (existingNick) {
+      const error = new Error(errorMessages.nickInUse);
+      res.status(403);
+      throw error;
+    }
+
     const hashedPassword = await bcrypt.hash(password, 12);
     const insertedUser = await User.query(trx).insert({
       nick,
@@ -59,9 +68,6 @@ router.post('/signup', async (req, res, next) => {
     const insertEemptyUserPhysical = await UserPhysical.query(trx).insert({
       [DB_PREFIX + 'user_id']: insertedUser.id,
     });
-
-    console.log('피지컬~~ 피지컬~');
-    console.log(insertEemptyUserPhysical);
 
     delete insertedUser.password;
     const payload = {

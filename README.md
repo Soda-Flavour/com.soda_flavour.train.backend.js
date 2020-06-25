@@ -1,27 +1,34 @@
+<!-- prettier-ignore -->
 # tennist App (backend)
 
 For tennis!
 
-#### 1. Database diagram
+## 1. Database diagram
 
 ![Tennist - database Diagram](https://user-images.githubusercontent.com/19925297/85151611-f395c380-b28e-11ea-87fc-e2f879617764.png)
 
-### 2. Todo list
+## 2. Todo list
 
-- [ ] DB 생성
+### 데이터 베이스
 
-  - [x] knex 기본설정
-  - [x] 마이그레이션 파일생성
-    - [x] 1뎁스 DB 생성
-    - [x] 2뎁스 DB 생성
-    - [x] 3뎁스 DB 생성
-    - [x] 4뎁스 DB 생성
-  - [x] 시드 파일생성
-    - [ ] 기본 시드 파일 생성
+- [x] DB 생성
+- [x] knex 기본설정
+- [x] 마이그레이션 파일생성
+  - [x] 1뎁스 DB 생성
+  - [x] 2뎁스 DB 생성
+  - [x] 3뎁스 DB 생성
+  - [x] 4뎁스 DB 생성
+- [x] 시드 파일생성
+
+- [ ] 기본 시드 파일 생성
+
+### SERVER
 
 - [x] Node 서버 생성
 
 - [x] objection js 연동 생성
+
+### AUTH
 
 - [x] auth 라우터 생성
 
@@ -34,7 +41,7 @@ For tennis!
 
   - [x] 필수값 유효성 체크
   - [x] 이메일 중복여부 확인 (unique)
-  - [ ] 닉네임 중복여부 확인 (unique)
+  - [x] 닉네임 중복여부 확인 (unique)
   - [x] 비밀번호 암호화
   - [x] 데이터베이스 insert
   - [x] 피지컬 데이터베이스 빈 row insert
@@ -67,31 +74,30 @@ For tennis!
   - [ ] 에러시 코드 전달
   - [ ] 테스트 코드 작성
 
-//////추가개발시 고려사항.
-
-- [ ] 유저 기본정보 수정 POST /user/:id
-
-  - [ ] 로그인 확인 미들웨어 연동
-  - [ ] 수정 요소값 유효성 체크
-  - [ ] DB의 기본 유저 정보 업데이트
-  - [ ] 유저 정보 업데이트 전달
-  - [ ] 에러시 코드 전달
-  - [ ] 테스트 코드 작성
-        ////
+```diff
+- 추가개발시 고려사항.
+ 유저 기본정보 수정 POST /user/:id
+   로그인 확인 미들웨어 연동
+   수정 요소값 유효성 체크
+   DB의 기본 유저 정보 업데이트
+   유저 정보 업데이트 전달
+   에러시 코드 전달
+   테스트 코드 작성
+```
 
 - [x] user physical 라우터 생성
   - [x] user physical 라우터 토큰 체크 연동
 - [x] user physical 모델 생성
 - [x] user physical 스키마 생성
 
-- [x] 유저 피지컬정보 요청 GET /physical/:id
+# - [ ] 유저 피지컬정보 요청 GET /physical/:id
 
-  - [x] 로그인 확인 미들웨어 연동
-  - [x] 필수값 유효성 체크 (id)
-  - [x] DB의 유저 피지컬 정보 가져오기
-  - [x] 유저 피지컬 정보 전달
-  - [ ] 에러시 코드 전달
-  - [ ] 테스트 코드 작성
+      - [x] 로그인 확인 미들웨어 연동
+      - [x] 필수값 유효성 체크 (id)
+      - [x] DB의 유저 피지컬 정보 가져오기
+      - [x] 유저 피지컬 정보 전달
+      - [ ] 에러시 코드 전달
+      - [ ] 테스트 코드 작성
 
 - [ ] 유저 피지컬정보 수정 POST /physical/:id
 
@@ -134,3 +140,7 @@ For tennis!
 - [ ]
 - [ ]
 - [ ]
+
+```
+
+```
