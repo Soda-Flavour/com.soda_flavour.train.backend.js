@@ -61,20 +61,16 @@ router.post('/signup', async (req, res, next) => {
       [DB_PREFIX + 'user_id']: insertedUser.id,
     });
 
-    delete insertedUser.password;
-    const payload = {
-      id: insertedUser.id,
-      nick,
-      email,
-    };
-    const token = await jwt.sign(payload);
     res.json({
-      user: payload,
-      token,
+      result: { email: email },
     });
     await trx.commit();
   } catch (error) {
+    console.log(error);
     await trx.rollback();
+    if (error.errorCode == undefined) {
+      error = await apiError('E3000');
+    }
     next(error);
   }
 });
@@ -119,6 +115,9 @@ router.post('/signin', async (req, res, next) => {
       token,
     });
   } catch (error) {
+    if (error.errorCode == undefined) {
+      error = await apiError('E3100');
+    }
     next(error);
   }
 });

@@ -5,7 +5,7 @@ module.exports = {
   },
   E3000: {
     errorCode: 'E3000',
-    errorMessage: '회원가입도중 에러가 발생했습니다.',
+    errorMessage: '회원가입 도중 에러가 발생했습니다.',
   },
   E3010: {
     errorCode: 'E3010',
@@ -30,5 +30,9 @@ module.exports = {
   E3030: {
     errorCode: 'E3030',
     errorMessage: '로그인 정보가 올바르지 않습니다.',
+  },
+  E3100: {
+    errorCode: 'E3100',
+    errorMessage: '로그인 도중 에러가 발생했습니다.',
   },
 };
