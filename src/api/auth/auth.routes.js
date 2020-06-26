@@ -3,29 +3,14 @@ const yup = require('yup');
 const bcrypt = require('bcrypt');
 const { DB_PREFIX } = require('../../constants/project');
 
+const { signUpValidSchema, signinValidSchema } = require('./auth.validSchema');
+
+const apiError = require('../../lib/apiError');
+
 const jwt = require('../../lib/jwt');
 const User = require('../users/users.model');
 const UserPhysical = require('../user_physical/user_physical.model');
 const router = express.Router();
-
-const schema = yup.object().shape({
-  nick: yup
-    .string()
-    .trim()
-    .min(2)
-    .matches(/[A-Za-z0-9가-힣]+/)
-    .required(),
-  email: yup.string().trim().email().required(),
-  password: yup //최소 8 자, 최대 18자 대문자 하나 이상, 소문자 하나, 숫자 하나 및 특수 문자 하나 이상
-    .string()
-    .min(8)
-    .max(18)
-    .matches(/[^A-Za-z]/)
-    .matches(/[A-Z]/)
-    .matches(/[a-z]/)
-    .matches(/[0-9]/)
-    .required(),
-});
 
 const errorMessages = {
   invalidLogin: '로그인 실패',
@@ -42,20 +27,27 @@ router.post('/signup', async (req, res, next) => {
       email,
       password,
     };
-    await schema.validate(newUser, { abortEarly: false });
+
+    await signUpValidSchema
+      .validate(newUser, { abortEarly: true })
+      .catch(async (err) => {
+        const _err = await apiError(err.params.label);
+        res.status(403);
+        throw _err;
+      });
 
     const existingUser = await User.query().where({ email }).first();
     if (existingUser) {
-      const error = new Error(errorMessages.emailInUse);
+      const err = await apiError('E3020');
       res.status(403);
-      throw error;
+      throw err;
     }
 
     const existingNick = await User.query().where({ nick }).first();
     if (existingNick) {
-      const error = new Error(errorMessages.nickInUse);
+      const err = await apiError('E3021');
       res.status(403);
-      throw error;
+      throw err;
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -90,24 +82,28 @@ router.post('/signup', async (req, res, next) => {
 router.post('/signin', async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    await schema.validate(
-      {
-        nick: 'None',
-        email,
-        password,
-      },
-      { abortEarly: false }
-    );
+    const userData = {
+      email,
+      password,
+    };
+
+    await signinValidSchema
+      .validate(userData, { abortEarly: true })
+      .catch(async (err) => {
+        const _err = await apiError(err.params.label);
+        res.status(403);
+        throw _err;
+      });
 
     const user = await User.query().where({ email }).first();
     if (!user) {
-      const error = new Error(errorMessages.invalidLogin);
+      const err = await apiError('E3030');
       res.status(403);
-      throw error;
+      throw err;
     }
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      const error = new Error(errorMessages.invalidLogin);
+      const err = await apiError('E3030');
       res.status(403);
       throw error;
     }
