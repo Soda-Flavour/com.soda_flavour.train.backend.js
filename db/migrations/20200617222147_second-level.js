@@ -45,12 +45,12 @@ exports.up = async (knex) => {
       table.increments('id').notNullable();
       table.string('model').notNullable();
       table.integer('weight_ungut').notNullable();
-      references(table, tableNames.racketCompany);
-      references(table, tableNames.racketVersion);
-      references(table, tableNames.racketHeadSize);
-      references(table, tableNames.racketPattern);
-      references(table, tableNames.racketLength);
-      references(table, tableNames.racketbalance);
+      references(table, tableNames.racketCompany, false);
+      references(table, tableNames.racketVersion, false);
+      references(table, tableNames.racketHeadSize, false);
+      references(table, tableNames.racketPattern, false);
+      references(table, tableNames.racketLength, false);
+      references(table, tableNames.racketbalance, false);
       addDefaultColumns(table);
 
       console.log(`${tableNames.racket} 테이블 생성 성공`);

@@ -15,20 +15,39 @@ exports.seed = async (knex) => {
   for (var a = 12; a > 0; a--) {
     var heavyValue = {
       balance: 'HH',
+      point: a + '.5',
+    };
+
+    balanceChart.push(heavyValue);
+    var heavyValue = {
+      balance: 'HH',
       point: a,
     };
-    balanceChart.push(heavyChart);
+    balanceChart.push(heavyValue);
   }
+  balanceChart.push({
+    balance: 'HH',
+    point: 0.5,
+  });
 
   balanceChart.push({
     balance: 'Even',
     point: 0,
+  });
+  balanceChart.push({
+    balance: 'HL',
+    point: 0.5,
   });
 
   for (var a = 1; a <= 12; a++) {
     var lightValue = {
       balance: 'HL',
       point: a,
+    };
+    balanceChart.push(lightValue);
+    var lightValue = {
+      balance: 'HL',
+      point: a + '.5',
     };
     balanceChart.push(lightValue);
   }

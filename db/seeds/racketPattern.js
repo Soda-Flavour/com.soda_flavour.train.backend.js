@@ -29,6 +29,11 @@ exports.seed = async (knex) => {
       main: 16,
       cross: 18,
     },
+    {
+      name: '오픈',
+      main: 18,
+      cross: 16,
+    },
   ];
 
   await knex(tableNames.racketPattern).insert(patternChart);
