@@ -1,5 +1,6 @@
 const express = require('express');
 const yup = require('yup');
+const apiError = require('../../lib/apiError');
 
 const UserPhysical = require('./user_physical.model');
 const authMiddlewares = require('../auth/auth.middlewares');
@@ -15,7 +16,11 @@ router.get('/:id', authMiddlewares.isLoggedIn, async (req, res, next) => {
   const { id } = req.params;
   try {
     await schema.validate({ id }, { abortEarly: false });
-    if (req.user.id != id) throw new Error('허용되지 않은 요청입니다.');
+    if (req.user.id != parseInt(id, 10)) {
+      const err = await apiError('E3200');
+      res.status(403);
+      throw err;
+    }
     const users = await UserPhysical.query()
       .select(
         'id',

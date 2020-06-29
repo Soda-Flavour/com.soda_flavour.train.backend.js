@@ -1,7 +1,11 @@
 module.exports = {
+  E1000: {
+    errorCode: 'E1000',
+    errorMessage: '서버에서 알 수 없는 에러가 발생했습니다.',
+  },
   E2000: {
     errorCode: 'E2000',
-    errorMessage: '서버에서 알 수 없는 에러가 발생했습니다.',
+    errorMessage: '로그인이 필요합니다.',
   },
   E3000: {
     errorCode: 'E3000',
@@ -38,5 +42,9 @@ module.exports = {
   E3100: {
     errorCode: 'E3100',
     errorMessage: '로그인 도중 에러가 발생했습니다.',
+  },
+  E3200: {
+    errorCode: 'E3200',
+    errorMessage: '요청하신 정보는 권한이 없습니다.',
   },
 };
