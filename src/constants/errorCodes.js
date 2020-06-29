@@ -27,6 +27,7 @@ module.exports = {
     errorCode: 'E3013',
     errorMessage: '전달받은 비밀번호가 비밀번호 최대길이를 초과합니다.',
   },
+
   E3020: {
     errorCode: 'E3020',
     errorMessage: '사용중인 이메일입니다.',
@@ -42,6 +43,18 @@ module.exports = {
   E3100: {
     errorCode: 'E3100',
     errorMessage: '로그인 도중 에러가 발생했습니다.',
+  },
+  E3017: {
+    errorCode: 'E3017',
+    errorMessage: '허용되지 않은 요청입니다.',
+  },
+  E3018: {
+    errorCode: 'E3018',
+    errorMessage: '피지컬 정보를 가져오지 못했습니다.',
+  },
+  E3019: {
+    errorCode: 'E3019',
+    errorMessage: '피지컬 업데이트에 실패했습니다.',
   },
   E3210: {
     errorCode: 'E3210',
@@ -74,5 +87,17 @@ module.exports = {
   E3217: {
     errorCode: 'E3217',
     errorMessage: '성별은 male, female 만 가능합니다.',
+  },
+  E3300: {
+    errorCode: 'E3300',
+    errorMessage: '라켓회사 리스트를 가져오지 못했습니다.',
+  },
+  E3400: {
+    errorCode: 'E3400',
+    errorMessage: '라켓버전 리스트를 가져오지 못했습니다.',
+  },
+  E3410: {
+    errorCode: 'E3410',
+    errorMessage: '해당되는 라켓 버전 리스트가 없습니다.',
   },
 };
