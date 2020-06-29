@@ -34,17 +34,17 @@
       "type": "string",
       "title": "손잡이"
     },
-    "play_style_id": {
+    "t_play_style_id": {
       "$id": "#/properties/play_style_id",
       "type": "integer",
       "title": "플레이 스타일 아이디"
     },
-    "forehand_style_id": {
+    "t_forehand_style_id": {
       "$id": "#/properties/forehand_style_id",
       "type": "integer",
       "title": "포핸드 스타일 아이디"
     },
-    "backhand_style_id": {
+    "t_backhand_style_id": {
       "$id": "#/properties/backhand_style_id",
       "type": "integer",
       "title": "백핸드 스타일 아이디"

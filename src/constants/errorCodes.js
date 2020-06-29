@@ -43,8 +43,36 @@ module.exports = {
     errorCode: 'E3100',
     errorMessage: '로그인 도중 에러가 발생했습니다.',
   },
-  E3200: {
-    errorCode: 'E3200',
-    errorMessage: '요청하신 정보는 권한이 없습니다.',
+  E3210: {
+    errorCode: 'E3210',
+    errorMessage: '몸무게는 10~250까지만 숫자만 가능합니다.',
+  },
+  E3211: {
+    errorCode: 'E3211',
+    errorMessage: '키는 10~250까지만 가능합니다.',
+  },
+  E3212: {
+    errorCode: 'E3212',
+    errorMessage: '손잡이는 left, right 만 가능합니다.',
+  },
+  E3213: {
+    errorCode: 'E3213',
+    errorMessage: '플레이 스타일은 숫자만 가능합니다.',
+  },
+  E3214: {
+    errorCode: 'E3214',
+    errorMessage: '포핸드 스타일은 숫자만 가능합니다.',
+  },
+  E3215: {
+    errorCode: 'E3215',
+    errorMessage: '백핸드 스타일은 숫자만 가능합니다.',
+  },
+  E3216: {
+    errorCode: 'E3216',
+    errorMessage: '나이는 1~120까지만 가능합니다.',
+  },
+  E3217: {
+    errorCode: 'E3217',
+    errorMessage: '성별은 male, female 만 가능합니다.',
   },
 };
