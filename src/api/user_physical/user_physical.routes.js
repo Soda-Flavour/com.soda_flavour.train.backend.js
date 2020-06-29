@@ -4,19 +4,17 @@ const apiError = require('../../lib/apiError');
 
 const UserPhysical = require('./user_physical.model');
 const authMiddlewares = require('../auth/auth.middlewares');
-const { orWhereNotExists } = require('../../db');
-const { updatePhysicalValidSchema } = require('./user_physical.validSchema');
+const {
+  getUserPhysicalValidSchema,
+  updatePhysicalValidSchema,
+} = require('./user_physical.validSchema');
 const router = express.Router();
 router.use(authMiddlewares.checkUserHasToken);
-
-const schema = yup.object().shape({
-  id: yup.number().required(),
-});
 
 router.get('/:id', authMiddlewares.isLoggedIn, async (req, res, next) => {
   const { id } = req.params;
   try {
-    await schema.validate({ id }, { abortEarly: false });
+    await getUserPhysicalValidSchema.validate({ id }, { abortEarly: false });
     if (req.user.id != parseInt(id, 10)) {
       const err = await apiError('E3200');
       res.status(403);
@@ -37,6 +35,9 @@ router.get('/:id', authMiddlewares.isLoggedIn, async (req, res, next) => {
       .where('deleted_at', null);
     res.json(users);
   } catch (error) {
+    if (error.errorCode == undefined) {
+      error = await apiError('E3018');
+    }
     next(error);
   }
 });
@@ -86,6 +87,9 @@ router.post('/', authMiddlewares.isLoggedIn, async (req, res, next) => {
     // const user = await User.query.udate(req.body);
   } catch (error) {
     console.log(error);
+    if (error.errorCode == undefined) {
+      error = await apiError('E3019');
+    }
     next(error);
   }
 });

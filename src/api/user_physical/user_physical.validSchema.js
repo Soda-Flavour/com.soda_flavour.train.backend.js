@@ -1,4 +1,9 @@
 const yup = require('yup');
+
+const getUserPhysicalValidSchema = yup.object().shape({
+  id: yup.number().required().label('E3018'),
+});
+
 const updatePhysicalValidSchema = yup.object().shape({
   weight_kg: yup.number().min(10).max(250).label('E3210'),
   height_cm: yup.number().min(10).max(250).label('E3211'),
@@ -25,5 +30,6 @@ const updatePhysicalValidSchema = yup.object().shape({
 });
 
 module.exports = {
+  getUserPhysicalValidSchema,
   updatePhysicalValidSchema,
 };
