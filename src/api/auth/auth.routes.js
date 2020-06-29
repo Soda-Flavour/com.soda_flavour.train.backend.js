@@ -56,7 +56,7 @@ router.post('/signup', async (req, res, next) => {
     });
 
     res.json({
-      result: { email: email },
+      result: { state: 'succeed', messag: 'succeed!!', data: { email: email } },
     });
     await trx.commit();
   } catch (error) {
