@@ -34,7 +34,6 @@ exports.up = async (knex) => {
     createNameTable(knex, tableNames.forehandStyle),
     createNameTable(knex, tableNames.backhandStyle),
     createNameTable(knex, tableNames.racketCompany),
-    createNameTable(knex, tableNames.racketVersion),
     knex.schema.createTable(tableNames.racketHeadSize, (table) => {
       table.increments('id').notNullable();
       table.integer('centimeter').unsigned().notNullable();
@@ -72,6 +71,11 @@ exports.up = async (knex) => {
       table.string('type').notNullable()
     ),
   ]);
+
+  /* CAUTION: 이 테이블은 racketCompany 테이블과 관계에 있다 */
+  await createNameTable(knex, tableNames.racketVersion, (table) => {
+    references(table, tableNames.racketCompany, false);
+  });
 
   // await knex.schema.createTable(tableNames.address, (table) => {
   //   table.increments('id').notNullable();
