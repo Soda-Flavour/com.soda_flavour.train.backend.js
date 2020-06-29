@@ -4,7 +4,7 @@ const schema = require('./user_physical.schema.json');
 
 const DB_PREFIX = require('../../constants/project');
 
-const UserModel = require('../users/users.model');
+const UserModel = require('../users/user.model');
 
 class UserPhysical extends Model {
   static get tableName() {

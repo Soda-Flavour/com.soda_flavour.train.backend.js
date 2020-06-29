@@ -1,6 +1,6 @@
 const { Model } = require('objection');
 const tableNames = require('../../constants/tableNames');
-const schema = require('./users.schema.json');
+const schema = require('./user.schema.json');
 const DB_PREFIX = require('../../constants/project');
 const UserPhysicalModel = require('../user_physical/user_physical.model');
 

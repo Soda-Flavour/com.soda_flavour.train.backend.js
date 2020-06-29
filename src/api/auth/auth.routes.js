@@ -8,7 +8,7 @@ const { signUpValidSchema, signinValidSchema } = require('./auth.validSchema');
 const apiError = require('../../lib/apiError');
 
 const jwt = require('../../lib/jwt');
-const User = require('../users/users.model');
+const User = require('../users/user.model');
 const UserPhysical = require('../user_physical/user_physical.model');
 const router = express.Router();
 

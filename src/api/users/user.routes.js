@@ -1,7 +1,7 @@
 const express = require('express');
 const yup = require('yup');
 
-const User = require('./users.model');
+const User = require('./user.model');
 const authMiddlewares = require('../auth/auth.middlewares');
 const { orWhereNotExists } = require('../../db');
 const router = express.Router();
