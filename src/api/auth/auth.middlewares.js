@@ -1,4 +1,5 @@
 const jwt = require('../../lib/jwt');
+const apiError = require('../../lib/apiError');
 
 async function checkUserHasToken(req, res, next) {
   console.log('토큰 검증');
@@ -28,10 +29,10 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-function unAuthorized(res, next) {
-  const error = new Error('Un-Authorized');
+async function unAuthorized(res, next) {
+  const _err = await apiError('E2000');
   res.status(401);
-  next(error);
+  next(_err);
 }
 
 module.exports = {

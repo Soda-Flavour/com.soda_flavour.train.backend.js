@@ -12,12 +12,6 @@ const User = require('../users/user.model');
 const UserPhysical = require('../user_physical/user_physical.model');
 const router = express.Router();
 
-const errorMessages = {
-  invalidLogin: '로그인 실패',
-  emailInUse: '사용중인 이메일',
-  nickInUse: '사용중인 닉네임',
-};
-
 router.post('/signup', async (req, res, next) => {
   const { nick, email, password } = req.body;
   const trx = await User.startTransaction();
