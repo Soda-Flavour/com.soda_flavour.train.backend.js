@@ -9,6 +9,7 @@ const signUpValidSchema = yup.object().shape({
   email: yup.string().trim().email().required().label('E3011'),
   password: yup //최소 8 자, 최대 18자 대문자 하나 이상, 소문자 하나, 숫자 하나 및 특수 문자 하나 이상
     .string()
+    .trim()
     .min(8)
     .max(18)
     .matches(/[^A-Za-z]/)

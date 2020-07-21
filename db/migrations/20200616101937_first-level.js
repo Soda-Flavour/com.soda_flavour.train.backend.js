@@ -83,8 +83,8 @@ exports.up = async (knex) => {
   //   table.string('street_address_2', 100);
   //   table.string('city', 50).notNullable();
   //   table.string('zipcode', 15).notNullable();
-  //   table.float('longitude').notNullable();
-  //   table.float('latitude').notNullable();
+  //   table.double('longitude').notNullable();
+  //   table.double('latitude').notNullable();
   //   references(table, tableNames.state);
   //   references(table, tableNames.country);
   // });
