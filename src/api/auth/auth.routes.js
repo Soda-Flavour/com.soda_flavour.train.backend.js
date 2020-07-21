@@ -10,7 +10,9 @@ const apiError = require('../../lib/apiError');
 const jwt = require('../../lib/jwt');
 const User = require('../users/user.model');
 const UserPhysical = require('../user_physical/user_physical.model');
+const authMiddlewares = require('./auth.middlewares');
 const router = express.Router();
+router.use(authMiddlewares.checkUserHasToken);
 
 router.post('/signup', async (req, res, next) => {
   const { nick, email, password } = req.body;
@@ -115,5 +117,22 @@ router.post('/signin', async (req, res, next) => {
     next(error);
   }
 });
+
+router.post(
+  '/checkAccessToken',
+  authMiddlewares.isLoggedIn,
+  async (req, res, next) => {
+    try {
+      res.json({
+        result: { state: 'succeed', message: 'succeed!!', data: null },
+      });
+    } catch (error) {
+      if (error.errorCode == undefined) {
+        error = await apiError('E3040');
+      }
+      next(error);
+    }
+  }
+);
 
 module.exports = router;
