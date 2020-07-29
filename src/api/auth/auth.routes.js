@@ -3,7 +3,7 @@ const yup = require('yup');
 const bcrypt = require('bcrypt');
 const { DB_PREFIX } = require('../../constants/project');
 
-const { signUpValidSchema, signinValidSchema } = require('./auth.validSchema');
+const { signUpValidSchema, loginValidSchema } = require('./auth.validSchema');
 
 const apiError = require('../../lib/apiError');
 
@@ -12,21 +12,30 @@ const User = require('../users/user.model');
 const UserPhysical = require('../user_physical/user_physical.model');
 const authMiddlewares = require('./auth.middlewares');
 const router = express.Router();
-router.use(authMiddlewares.checkUserHasToken);
+// router.use(authMiddlewares.checkUserHasToken);
 
 router.post('/signup', async (req, res, next) => {
-  const { nick, email, password } = req.body;
+  console.log(req.body);
+  const { nick, email, password, repassword } = req.body;
   const trx = await User.startTransaction();
   try {
     const newUser = {
       nick,
       email,
       password,
+      repassword,
     };
+
+    if (password != repassword) {
+      const _err = await apiError('E3014');
+      res.status(403);
+      throw _err;
+    }
 
     await signUpValidSchema
       .validate(newUser, { abortEarly: true })
       .catch(async (err) => {
+        console.log(err);
         const _err = await apiError(err.params.label);
         res.status(403);
         throw _err;
@@ -58,7 +67,11 @@ router.post('/signup', async (req, res, next) => {
     });
 
     res.json({
-      result: { state: 'succeed', messag: 'succeed!!', data: { email: email } },
+      result: {
+        status: 200,
+        message: '회원가입에 성공했습니다.',
+        data: { email: email },
+      },
     });
     await trx.commit();
   } catch (error) {
@@ -71,7 +84,7 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-router.post('/signin', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const userData = {
@@ -79,7 +92,7 @@ router.post('/signin', async (req, res, next) => {
       password,
     };
 
-    await signinValidSchema
+    await loginValidSchema
       .validate(userData, { abortEarly: true })
       .catch(async (err) => {
         const _err = await apiError(err.params.label);
@@ -105,10 +118,18 @@ router.post('/signin', async (req, res, next) => {
       nick: user.nick,
       email,
     };
-    const token = await jwt.sign(payload);
+    const access_t = await jwt.sign(payload);
+    const refresh_t = await jwt.refresh(payload);
     res.json({
-      user: payload,
-      token,
+      result: {
+        status: 200,
+        message: '환영합니다~!',
+        data: {
+          user: payload,
+          access_t,
+          refresh_t,
+        },
+      },
     });
   } catch (error) {
     if (error.errorCode == undefined) {
@@ -120,11 +141,12 @@ router.post('/signin', async (req, res, next) => {
 
 router.post(
   '/checkAccessToken',
+  authMiddlewares.checkUserHasToken,
   authMiddlewares.isLoggedIn,
   async (req, res, next) => {
     try {
       res.json({
-        result: { state: 'succeed', message: 'succeed!!', data: null },
+        result: { status: 'succeed', message: 'succeed!!', data: null },
       });
     } catch (error) {
       if (error.errorCode == undefined) {
