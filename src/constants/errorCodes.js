@@ -27,7 +27,10 @@ module.exports = {
     errorCode: 'E3013',
     errorMessage: '전달받은 비밀번호가 비밀번호 최대길이를 초과합니다.',
   },
-
+  E3014: {
+    errorCode: 'E3014',
+    errorMessage: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
+  },
   E3020: {
     errorCode: 'E3020',
     errorMessage: '사용중인 이메일입니다.',
