@@ -1,10 +1,7 @@
 const { Model } = require('objection');
 const tableNames = require('../../constants/tableNames');
 const schema = require('./user_physical.schema.json');
-
 const DB_PREFIX = require('../../constants/project');
-
-const UserModel = require('../users/user.model');
 
 class UserPhysical extends Model {
   static get tableName() {
@@ -15,18 +12,18 @@ class UserPhysical extends Model {
     return schema;
   }
 
-  static get relationMappings() {
-    return {
-      user_id: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: UserModel,
-        join: {
-          from: tableNames.userPhysical + '.' + DB_PREFIX + 'user_id',
-          to: tableNames.user + '.id',
-        },
-      },
-    };
-  }
+  // static get relationMappings() {
+  //   return {
+  //     user_id: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: UserModel,
+  //       join: {
+  //         from: tableNames.userPhysical + '.' + DB_PREFIX + 'user_id',
+  //         to: tableNames.user + '.id',
+  //       },
+  //     },
+  //   };
+  // }
 }
 
 module.exports = UserPhysical;
