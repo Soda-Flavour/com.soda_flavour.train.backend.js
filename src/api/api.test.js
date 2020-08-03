@@ -9,7 +9,6 @@ describe('GET /api/v1', () => {
       .get('/api/v1')
       .expect('Content-Type', /json/)
       .expect(200);
-
     expect(response.body.message).toEqual(project.message);
   });
 });
