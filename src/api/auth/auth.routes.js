@@ -15,7 +15,6 @@ const router = express.Router();
 // router.use(authMiddlewares.checkUserHasToken);
 
 router.post('/signup', async (req, res, next) => {
-  console.log(req.body);
   const { nick, email, password, repassword } = req.body;
   const trx = await User.startTransaction();
   try {
@@ -35,7 +34,6 @@ router.post('/signup', async (req, res, next) => {
     await signUpValidSchema
       .validate(newUser, { abortEarly: true })
       .catch(async (err) => {
-        console.log(err);
         const _err = await apiError(err.params.label);
         res.status(403);
         throw _err;
@@ -75,7 +73,6 @@ router.post('/signup', async (req, res, next) => {
     });
     await trx.commit();
   } catch (error) {
-    console.log(error);
     await trx.rollback();
     if (error.errorCode == undefined) {
       error = await apiError('E3000');

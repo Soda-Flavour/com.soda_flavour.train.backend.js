@@ -12,7 +12,7 @@ const signUpValidSchema = yup.object().shape({
     .trim()
     .min(8)
     .max(18)
-    .matches(/[^A-Za-z]/)
+    .matches(/[$&+,:;=?@#|'<>.^*()%!-]/)
     .matches(/[A-Z]/)
     .matches(/[a-z]/)
     .matches(/[0-9]/)
