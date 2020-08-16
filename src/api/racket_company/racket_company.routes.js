@@ -13,11 +13,14 @@ router.get('/', async (req, res, next) => {
       'name',
       'name_kor'
     );
+
     res.json({
       result: {
-        state: 'succeed',
-        messag: 'succeed!!',
-        data: { list: racketCompany },
+        status: 200,
+        message: 'This is list.',
+        data: {
+          list: racketCompany,
+        },
       },
     });
   } catch (error) {
