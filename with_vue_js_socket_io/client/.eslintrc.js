@@ -7,8 +7,9 @@ module.exports = {
   parserOptions: {
     parser: "babel-eslint"
   },
-  quotes: [2, "double", { avoidEscape: false }],
+
   rules: {
+    quotes: ["off", "single"],
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off"
   }
