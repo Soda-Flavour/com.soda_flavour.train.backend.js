@@ -1,12 +1,11 @@
 <!-- prettier-ignore -->
 # tennist App (backend)
 
-For tennis!
+### -이 프로젝트는 작업 공개용 프로젝트이며, 이후의 작업은 비공개로 진행되고 있습니다.-
 
 ## 1. Database diagram
 
 ![tennist_database_v1 0](https://user-images.githubusercontent.com/19925297/86031847-68c47e00-ba71-11ea-9b40-7be80fea8615.png)
-
 
 ## 2. Todo list
 
@@ -129,19 +128,17 @@ For tennis!
   - [ ] 에러시 코드 전달
   - [ ] 테스트 코드 작성
 
-- [ ] 라켓 거트 회사  리스트 GET /racket_gut_company
+- [ ] 라켓 거트 회사 리스트 GET /racket_gut_company
 
   - [ ] DB의 거트 회사 리스트 전송
   - [ ] 에러시 코드 전달
   - [ ] 테스트 코드 작성
 
-
-- [ ] 라켓 거트 회사  리스트 GET /racket_gut
+- [ ] 라켓 거트 회사 리스트 GET /racket_gut
 
   - [ ] DB의 거트 리스트 전송
   - [ ] 에러시 코드 전달
   - [ ] 테스트 코드 작성
-
 
 - [ ] 유저 사용라켓 추가 POST /racket/user_racket
 
