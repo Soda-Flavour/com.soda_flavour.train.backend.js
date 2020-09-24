@@ -1,0 +1,45 @@
+{
+  "name": "type-script-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/production.js",
+    "dev": "nodemon src/development.ts",
+    "build": "tsc -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Soda-Flavour/type-script-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Soda-Flavour/type-script-api/issues"
+  },
+  "homepage": "https://github.com/Soda-Flavour/type-script-api#readme",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.1.3",
+    "helmet": "^4.1.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.7.0",
+    "@types/cors": "^2.8.7",
+    "@types/express": "^4.17.8",
+    "@types/express-rate-limit": "^5.1.0",
+    "@types/helmet": "0.0.48",
+    "@types/morgan": "^1.9.1",
+    "@types/node": "^14.11.2",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.2.0",
+    "eslint": "^7.9.0",
+    "nodemon": "^2.0.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}
