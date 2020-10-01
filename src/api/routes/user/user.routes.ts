@@ -1,13 +1,12 @@
 import express from "express";
 
 // import { auth } from "./routes/auth/auth.routes";
-import { userRouter } from "./user/user.routes";
+
 class Routes {
   public router: express.Router = express.Router();
 
   constructor() {
     this.routerList();
-    this.router.use("/user", userRouter);
 
     // switch (NODE_ENV) {
     //   case "production":
@@ -20,12 +19,21 @@ class Routes {
   }
 
   private routerList(): void {
-    this.router.get(`/`, (req: express.Request, res: express.Response) => {
-      res.json({
-        message: "하하하",
-      });
-    });
+    this.router.get(
+      `/`,
+      (
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+      ) => {
+        req.statusCode = 400;
+        next();
+        // res.json({
+        //   message: "유저 라우터",
+        // });
+      }
+    );
   }
 }
 
-export const router = new Routes().router;
+export const userRouter = new Routes().router;

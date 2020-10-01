@@ -6,6 +6,7 @@ import cors = require("cors");
 
 import { router } from "./api/routes/router";
 import { notFound } from "./api/middleware/notFound";
+import { errorHandler } from "./api/middleware/errorHandler";
 // import rateLimit from "express-rate-limit";
 
 export class App {
@@ -67,6 +68,7 @@ export class App {
   private setRouting(): void {
     this.app.use("/api/v1", router);
     this.app.use(notFound);
+    this.app.use(errorHandler);
   }
 
   private runServer(): void {
