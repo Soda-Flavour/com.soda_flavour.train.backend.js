@@ -26,7 +26,6 @@ class Routes {
         res: express.Response,
         next: express.NextFunction
       ) => {
-        req.statusCode = 400;
         next();
         // res.json({
         //   message: "유저 라우터",

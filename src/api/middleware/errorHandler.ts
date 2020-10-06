@@ -7,8 +7,7 @@ const errorHandler = (
   res: express.Response,
   next: express.NextFunction
 ) => {
-  console.log("statusCode", res.statusCode);
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  const statusCode = res.statusCode === 200 ? error.status : res.statusCode;
   const stack = process.env.NODE_ENV == "production" ? "Hi" : error.stack;
 
   res.status(statusCode);
