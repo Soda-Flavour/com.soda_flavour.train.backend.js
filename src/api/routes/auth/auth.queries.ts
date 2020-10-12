@@ -3,7 +3,7 @@ import knex from "../../database/connection";
 
 export function isExistEmail(reqParams: any): Promise<Knex<any, unknown[]>> {
   return knex
-    .select("email")
+    .select("id", "nick", "email", "password")
     .from("t_user")
     .where("email", "=", reqParams["email"])
     .first();
