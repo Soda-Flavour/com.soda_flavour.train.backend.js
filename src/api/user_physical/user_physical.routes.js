@@ -11,29 +11,27 @@ const {
 const router = express.Router();
 router.use(authMiddlewares.checkUserHasToken);
 
-router.get('/:id', authMiddlewares.isLoggedIn, async (req, res, next) => {
-  const { id } = req.params;
+router.get('/physical', authMiddlewares.isLoggedIn, async (req, res, next) => {
+  const { id } = req.user;
   try {
     await getUserPhysicalValidSchema.validate({ id }, { abortEarly: false });
-    if (req.user.id != parseInt(id, 10)) {
-      const err = await apiError('E3200');
-      res.status(403);
-      throw err;
-    }
-    const users = await UserPhysical.query()
-      .select(
-        'id',
-        't_user_id',
-        'weight_kg',
-        'height_cm',
-        'handed',
-        'age',
-        'sex'
-      )
+    // if (req.user.id != parseInt(id, 10)) {
+    //   const err = await apiError('E3200');
+    //   res.status(403);
+    //   throw err;
+    // }
+    const physical = await UserPhysical.query()
+      .select('weight_kg', 'height_cm', 'handed')
       .where('id', id)
       .where('t_user_id', req.user.id)
       .where('deleted_at', null);
-    res.json(users);
+    res.json({
+      result: {
+        status: 200,
+        message: 'send data..',
+        data: physical,
+      },
+    });
   } catch (error) {
     if (error.errorCode == undefined) {
       error = await apiError('E3018');
@@ -42,29 +40,16 @@ router.get('/:id', authMiddlewares.isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post('/', authMiddlewares.isLoggedIn, async (req, res, next) => {
-  const {
-    weight_kg,
-    height_cm,
-    handed,
-    t_play_style_id,
-    t_forehand_style_id,
-    t_backhand_style_id,
-    age,
-    sex,
-  } = req.body;
-  console.log('asdfasdf');
-
+router.post('/physical', authMiddlewares.isLoggedIn, async (req, res, next) => {
+  req.body.weight_kg = parseInt(req.body.weight_kg, 10);
+  req.body.height_cm = parseInt(req.body.height_cm, 10);
+  const { weight_kg, height_cm, handed } = req.body;
+  const { id } = req.user;
   try {
     const physicalData = {
       weight_kg,
       height_cm,
       handed,
-      t_play_style_id,
-      t_forehand_style_id,
-      t_backhand_style_id,
-      age,
-      sex,
     };
     const _physicalData = await updatePhysicalValidSchema
       .validate(physicalData, { abortEarly: true })
@@ -77,14 +62,16 @@ router.post('/', authMiddlewares.isLoggedIn, async (req, res, next) => {
     console.log(physicalData);
 
     const physicalUpdated = await UserPhysical.query()
-      .findById(parseInt(req.user.id, 10))
-      .patch(physicalData);
-    console.log(physicalUpdated);
+      .patch(physicalData)
+      .where('t_user_id', id);
 
-    // const userPhysical = await UserPhysical.query().update()
-
-    res.json({ result: { state: 'succeed', messag: 'succeed!!', data: null } });
-    // const user = await User.query.udate(req.body);
+    res.json({
+      result: {
+        status: 200,
+        message: '신체정보를 업데이트 했습니다.',
+        data: null,
+      },
+    });
   } catch (error) {
     console.log(error);
     if (error.errorCode == undefined) {

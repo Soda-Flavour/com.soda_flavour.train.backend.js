@@ -14,14 +14,13 @@ async function checkUserHasToken(req, res, next) {
     req.user = user;
     next();
   } catch (error) {
-    console.log('Token check error');
-    console.log(error);
+    console.log('토큰 검증 실패');
     next();
   }
 }
 
 function isLoggedIn(req, res, next) {
-  console.log('로그인 검증');
+  console.log('로그인 검증로직 통과...');
   if (req.user) {
     next();
   } else {

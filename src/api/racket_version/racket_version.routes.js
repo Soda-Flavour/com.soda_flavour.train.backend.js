@@ -16,17 +16,18 @@ router.get('/:racketCompanyId', async (req, res, next) => {
     const racketVersion = await RacketVersion.query()
       .select('id', 'name', 'name_kor')
       .where({ t_racket_company_id: racketCompanyId });
+
     res.json({
       result: {
-        state: 'succeed',
-        messag: 'succeed!!',
+        status: 200,
+        message: 'send data..',
         data: { list: racketVersion },
       },
     });
   } catch (error) {
     console.log(error);
     if (error.errorCode == undefined) {
-      error = await apiError('E3300');
+      error = await apiError('E3400');
     }
     next(error);
   }
