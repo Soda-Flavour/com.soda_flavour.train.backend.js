@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "UserPhysical",
+  "description": "유저의 피지컬 스키마",
+  "default": {},
+
+  "required": ["t_user_id"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The database id."
+    },
+    "t_user_id": {
+      "$id": "#/properties/t_user_id",
+      "type": "integer",
+      "title": "유저의 아이디 값"
+    },
+    "weight_kg": {
+      "$id": "#/properties/weight_kg",
+      "type": "integer",
+      "title": "몸무게"
+    },
+    "height_cm": {
+      "$id": "#/properties/height_cm",
+      "type": "integer",
+      "title": "키"
+    },
+    "handed": {
+      "$id": "#/properties/handed",
+      "type": "string",
+      "title": "손잡이"
+    },
+    "t_play_style_id": {
+      "$id": "#/properties/play_style_id",
+      "type": "integer",
+      "title": "플레이 스타일 아이디"
+    },
+    "t_forehand_style_id": {
+      "$id": "#/properties/forehand_style_id",
+      "type": "integer",
+      "title": "포핸드 스타일 아이디"
+    },
+    "t_backhand_style_id": {
+      "$id": "#/properties/backhand_style_id",
+      "type": "integer",
+      "title": "백핸드 스타일 아이디"
+    },
+    "age": {
+      "$id": "#/properties/age",
+      "type": "integer",
+      "title": "나이"
+    },
+    "sex": {
+      "$id": "#/properties/sex",
+      "type": "string",
+      "title": "성별"
+    },
+    "created_at": {
+      "$id": "#/properties/created_at",
+      "type": "string",
+      "title": "피지컬 로우 생성일"
+    },
+    "updated_at": {
+      "$id": "#/properties/updated_at",
+      "type": "string",
+      "title": "피지컬 마지막 업데이트일"
+    }
+  }
+}

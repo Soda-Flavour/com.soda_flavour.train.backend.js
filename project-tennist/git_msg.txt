@@ -1,0 +1,5 @@
+refactor: Modifying Response Object
+
+올바른 응답시 객체내의 status는 200으로 한다.
+
+
